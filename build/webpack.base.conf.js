@@ -9,6 +9,7 @@ const happyThreadPool = HappyPack.ThreadPool({
 });
 
 module.exports = {
+  mode: process.env.NODE_ENV==="development" ? "development" : "production",
   entry: path.resolve(__dirname, "../src/main.js"),
   output: {
     path: path.resolve(__dirname, "../dist"),
@@ -38,7 +39,7 @@ module.exports = {
       // 以及 `.vue` 文件中的 `<style>` 块
       {
         test: /\.css$/,
-        use: ["vue-style-loader", "css-loader"]
+        use: ["vue-style-loader", "style-loader", "css-loader"]
       },
       
       {
@@ -46,6 +47,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
+          name: "[name].[ext]"
         }
       },
       {
@@ -53,6 +55,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
+          name: "[name].[ext]"
         }
       },
       {
